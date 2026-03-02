@@ -96,3 +96,34 @@ export async function updateTikTokTask(req, res) {
     });
   }
 }
+
+/**
+ * GET latest TikTok task
+ * /api/tiktok/task/latest
+ * /api/tiktok/task/latest?scan_type=video_comments
+ * /api/tiktok/task/latest?status=success
+ * /api/tiktok/task/latest?scan_type=video_comments&status=success
+ */
+export async function getLatestTikTokTask(req, res) {
+  try {
+    const { scan_type, status } = req.query;
+
+    const query = {};
+    if (scan_type) query.scan_type = scan_type;
+    if (status) query.status = status;
+
+    const task = await TikTokTask.findOne(query)
+      .sort({ createdAt: -1 })
+      .lean();
+
+    return res.json({
+      success: true,
+      data: task || null,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+}

@@ -27,6 +27,7 @@ export async function createTikTokScan(data) {
           delay_range: data.delay_range,
           batch_size: data.batch_size,
           batch_delay: data.batch_delay,
+          friends_limit: data.friends_limit ?? 50,
         },
       });
       break;
