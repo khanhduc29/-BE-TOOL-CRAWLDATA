@@ -1,0 +1,28 @@
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import { connectDB } from "./config/db.js";
+import tiktokRoute from "./routes/tiktok.route.js";
+import googleMapRoute from "./routes/googleMap.route.js";
+
+dotenv.config();
+
+const app = express();
+
+// middleware
+app.use(cors());
+app.use(express.json());
+
+// test route
+app.get("/", (req, res) => {
+  res.send("API is running 🚀");
+});
+app.use("/api/tiktok", tiktokRoute);
+app.use("/api/google-map", googleMapRoute);
+// start server
+const PORT = process.env.PORT || 3000;
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+  });
+});
