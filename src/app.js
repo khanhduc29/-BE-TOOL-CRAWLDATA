@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import { connectDB } from "./config/db.js";
 import tiktokRoute from "./routes/tiktok.route.js";
 import googleMapRoute from "./routes/googleMap.route.js";
+import youtubeRoute from "./routes/youtube.route.js";
+
 
 dotenv.config();
 
@@ -19,6 +21,8 @@ app.get("/", (req, res) => {
 });
 app.use("/api/tiktok", tiktokRoute);
 app.use("/api/google-map", googleMapRoute);
+app.use("/api/youtube", youtubeRoute);
+
 // start server
 const PORT = process.env.PORT || 3000;
 connectDB().then(() => {
