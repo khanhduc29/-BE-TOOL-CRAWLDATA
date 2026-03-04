@@ -22,6 +22,7 @@ export async function createYouTubeScan(data) {
         input: {
           keyword: data.keyword,
           limit: data.limit ?? 20,
+          deep_scan_social: data.deep_scan_social ?? false,
         },
       });
       break;
@@ -48,7 +49,7 @@ export async function createYouTubeScan(data) {
         input: {
           video_url: data.video_url,
           limit_comments: data.limit_comments ?? 100,
-          deep_scan_social: data.deep_scan_social ?? false,
+          
         },
       });
       break;
