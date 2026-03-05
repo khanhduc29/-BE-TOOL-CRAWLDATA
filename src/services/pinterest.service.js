@@ -83,13 +83,12 @@ export async function updatePinterestTaskSuccess(taskId, results) {
     taskId,
     {
       status: "success",
-      results,
+      result: results, // ✅ đúng field
       finished_at: new Date(),
     },
     { new: true }
   );
 }
-
 /**
  * UPDATE TASK ERROR
  */
