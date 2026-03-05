@@ -2,6 +2,8 @@ import {
   createPinterestScan,
   getPendingPinterestTasks,
   getSuccessPinterestTasks,
+  updatePinterestTaskSuccess,
+  updatePinterestTaskError,
 } from "../services/pinterest.service.js";
 
 /**
@@ -60,6 +62,48 @@ export async function getSuccessTasks(req, res) {
       success: true,
       total: tasks.length,
       data: tasks,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+}
+
+/**
+ * UPDATE TASK ERROR
+ */
+export async function updateTaskError(req, res) {
+  try {
+    const { task_id, error } = req.body;
+
+    const task = await updatePinterestTaskError(task_id, error);
+
+    res.json({
+      success: true,
+      data: task,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+}
+
+/**
+ * UPDATE TASK SUCCESS
+ */
+export async function updateTaskSuccess(req, res) {
+  try {
+    const { task_id, results } = req.body;
+
+    const task = await updatePinterestTaskSuccess(task_id, results);
+
+    res.json({
+      success: true,
+      data: task,
     });
   } catch (err) {
     res.status(500).json({

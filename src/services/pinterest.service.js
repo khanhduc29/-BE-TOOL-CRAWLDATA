@@ -74,3 +74,33 @@ export async function getSuccessPinterestTasks(limit = 20) {
 
   return tasks;
 }
+
+/**
+ * UPDATE TASK SUCCESS
+ */
+export async function updatePinterestTaskSuccess(taskId, results) {
+  return PinterestTask.findByIdAndUpdate(
+    taskId,
+    {
+      status: "success",
+      results,
+      finished_at: new Date(),
+    },
+    { new: true }
+  );
+}
+
+/**
+ * UPDATE TASK ERROR
+ */
+export async function updatePinterestTaskError(taskId, error) {
+  return PinterestTask.findByIdAndUpdate(
+    taskId,
+    {
+      status: "error",
+      error,
+      finished_at: new Date(),
+    },
+    { new: true }
+  );
+}
