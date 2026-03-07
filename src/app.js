@@ -6,7 +6,7 @@ import tiktokRoute from "./routes/tiktok.route.js";
 import googleMapRoute from "./routes/googleMap.route.js";
 import youtubeRoute from "./routes/youtube.route.js";
 import pinterestRoute from "./routes/pinterest.route.js";
-
+import instagramRoutes from "./routes/instagram.routes.js";
 
 dotenv.config();
 
@@ -26,6 +26,7 @@ app.use("/api/youtube", youtubeRoute);
 
 
 app.use("/api/pinterest", pinterestRoute);
+app.use("/api/instagram", instagramRoutes);
 
 // start server
 const PORT = process.env.PORT || 3000;
